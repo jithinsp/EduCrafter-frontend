@@ -4,12 +4,14 @@ import { Observable } from 'rxjs';
 import { JwtService } from '../auth/jwt.service';
 import { IStudentResponse, ITeacherResponse } from '../../interfaces/signup.interface';
 import { User, UserModel } from '../../interfaces/user.model';
-import { BASE_URL } from '../../constants/baseurls.constant';
+import { API_USER_SERVICE } from '../../constants/baseurls.constant';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TeacherService {
+
+  BASE_URI = API_USER_SERVICE;
   
   constructor(private http: HttpClient,
     private authService: JwtService) { }
@@ -17,7 +19,7 @@ export class TeacherService {
   getAllStudents(): Observable<UserModel> {
     const jwtToken = localStorage.getItem('jwt');
     if (this.authService.extractRole() === '[ADMIN]' || this.authService.extractRole() === '[TEACHER]') {
-      return this.http.get<UserModel>(BASE_URL + 'user/admin/allStudents');
+      return this.http.get<UserModel>(this.BASE_URI + 'user/admin/allStudents');
     } else {
       return null;
     } 
@@ -27,29 +29,29 @@ export class TeacherService {
     const jwtToken = localStorage.getItem('jwt');
     const role = this.authService.extractRole();
     if(param === 'admin' && role === '[ADMIN]'){
-      return this.http.get<User[]>(BASE_URL + 'user/admin/allAdmins');
+      return this.http.get<User[]>(this.BASE_URI + 'user/admin/allAdmins');
     } else if(param === 'teacher' && role === '[ADMIN]'){
-      return this.http.get<User[]>(BASE_URL + 'user/admin/allTeachers');
+      return this.http.get<User[]>(this.BASE_URI + 'user/admin/allTeachers');
     } else if (param === 'student' && (role === '[ADMIN]' || role === '[TEACHER]')){
-      return this.http.get<User[]>(BASE_URL + 'user/teacher/allStudents');
+      return this.http.get<User[]>(this.BASE_URI + 'user/teacher/allStudents');
     } else if (param === 'parent' && (role === '[ADMIN]' || role === '[TEACHER]')){
-      return this.http.get<User[]>(BASE_URL + 'user/teacher/allParents');
+      return this.http.get<User[]>(this.BASE_URI + 'user/teacher/allParents');
     } else {
       return null;
     } 
   }
 
   getAttendanceOfStudents(): Observable<User[]>{
-    return this.http.get<User[]>(BASE_URL + 'user/teacher/allStudents');
+    return this.http.get<User[]>(this.BASE_URI + 'user/teacher/allStudents');
   }
 
   getAttendance(): Observable<User[]>{
-    return this.http.get<User[]>(BASE_URL + 'user/attendance/getAll');
+    return this.http.get<User[]>(this.BASE_URI + 'user/attendance/getAll');
   }
 
   getAttendanceOfStudent(): Observable<any>{
     const name = this.authService.extractUsername();
-    return this.http.get<any>(BASE_URL + 'user/attendance/getByStudent/'+name);
+    return this.http.get<any>(this.BASE_URI + 'user/attendance/getByStudent/'+name);
   }
 
   markAttendance(attendanceData:any[]) {
@@ -57,6 +59,6 @@ export class TeacherService {
     //   userId: userId,
     //   isPresent: isPresent,
     // };
-    return this.http.post(BASE_URL + 'user/attendance/mark',attendanceData);
+    return this.http.post(this.BASE_URI + 'user/attendance/mark',attendanceData);
   }
 }

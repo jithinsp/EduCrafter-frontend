@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BASE_URL } from '../../constants/baseurls.constant';
+import { API_ACADEMICS_SERVICE } from '../../constants/baseurls.constant';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
@@ -8,17 +8,19 @@ import { Observable } from 'rxjs';
 })
 export class ResourcesService {
 
+  BASE_URI = API_ACADEMICS_SERVICE;
+
   getFile(item: any): Observable<any> {
     const options = {
       responseType: 'blob' as 'json',
     };
-    return this.http.get(BASE_URL + 'academics/resources/files/' + item.filepath, options);
+    return this.http.get(this.BASE_URI + 'academics/resources/files/' + item.filepath, options);
   }
 
   constructor(private http: HttpClient) {}
 
   getFiles(): Observable<any[]> {
-    return this.http.get<any[]>(BASE_URL + 'academics/resources/listAll');
+    return this.http.get<any[]>(this.BASE_URI + 'academics/resources/listAll');
   }
 
   uploadFile(formData: FormData): Observable<any> {
@@ -28,7 +30,7 @@ export class ResourcesService {
     // formData.append('file', file);
     console.log(formData);
     
-    return this.http.post(BASE_URL + 'academics/resources/upload', formData);
+    return this.http.post(this.BASE_URI + 'academics/resources/upload', formData);
   }
 
   // uploadFile(file: File): Observable<any> {

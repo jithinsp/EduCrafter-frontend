@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { JwtService } from '../auth/jwt.service';
 import { Observable, of } from 'rxjs';
-import { BASE_URL } from '../../constants/baseurls.constant';
+
 import { ITeacherResponse } from '../../interfaces/signup.interface';
 import { HttpClient } from '@angular/common/http';
+import { API_ACADEMICS_SERVICE } from '../../constants/baseurls.constant';
 
 @Injectable({
   providedIn: 'root'
@@ -13,10 +14,12 @@ export class AcademicsService {
   constructor(private http: HttpClient,
     private authService: JwtService) { }
 
+  BASE_URI = API_ACADEMICS_SERVICE;
+
   getAllClasses(): Observable<ITeacherResponse[]> {
     const jwtToken = localStorage.getItem('jwt');
     if (this.authService.extractRole() === '[ADMIN]' || this.authService.extractRole() === '[TEACHER]') {
-      return this.http.get<ITeacherResponse[]>(BASE_URL + 'academics/classes/getAll');
+      return this.http.get<ITeacherResponse[]>(this.BASE_URI + 'academics/classes/getAll');
     } else {
       return of([]);
     }
@@ -25,7 +28,7 @@ export class AcademicsService {
   getClass(editId: string): Observable<any> {
     const jwtToken = localStorage.getItem('jwt');
     if (this.authService.extractRole() === '[ADMIN]' || this.authService.extractRole() === '[TEACHER]') {
-      return this.http.get(BASE_URL + 'academics/classes/get/' + editId);
+      return this.http.get(this.BASE_URI + 'academics/classes/get/' + editId);
     } else {
       return of([]);
     }
@@ -35,7 +38,7 @@ export class AcademicsService {
     const jwtToken = localStorage.getItem('jwt');
     if (this.authService.extractRole() === '[ADMIN]') {
       console.log(item.id);
-      return this.http.put<any[]>(BASE_URL + 'academics/classes/delete/' + item.id, item);
+      return this.http.put<any[]>(this.BASE_URI + 'academics/classes/delete/' + item.id, item);
     } else {
       return of([]);
     }
@@ -45,7 +48,7 @@ export class AcademicsService {
     const jwtToken = localStorage.getItem('jwt');
     if (this.authService.extractRole() === '[ADMIN]') {
       console.log(item.id);
-      return this.http.put<any[]>(BASE_URL + 'academics/classes/toggle/' + item.id, item);
+      return this.http.put<any[]>(this.BASE_URI + 'academics/classes/toggle/' + item.id, item);
     } else {
       return of([]);
     }
@@ -55,7 +58,7 @@ export class AcademicsService {
     const jwtToken = localStorage.getItem('jwt');
     if (this.authService.extractRole() === '[ADMIN]') {
       // console.log(item.id);
-      return this.http.post<any[]>(BASE_URL + 'academics/classes/addNew', value);
+      return this.http.post<any[]>(this.BASE_URI + 'academics/classes/addNew', value);
     } else {
       return of([]);
     }
@@ -66,7 +69,7 @@ export class AcademicsService {
     const jwtToken = localStorage.getItem('jwt');
     if (this.authService.extractRole() === '[ADMIN]') {
       console.log(item.id);
-      return this.http.put<any[]>(BASE_URL + 'academics/classes/editClass/' + item.id, item);
+      return this.http.put<any[]>(this.BASE_URI + 'academics/classes/editClass/' + item.id, item);
     } else {
       return of([]);
     }
@@ -76,7 +79,7 @@ export class AcademicsService {
   getAllSubjects(): Observable<any> {
     const jwtToken = localStorage.getItem('jwt');
     if (this.authService.extractRole() === '[ADMIN]' || this.authService.extractRole() === '[TEACHER]') {
-      return this.http.get<any>(BASE_URL + 'academics/subjects/getAll');
+      return this.http.get<any>(this.BASE_URI + 'academics/subjects/getAll');
     } else {
       return of([]);
     }
@@ -85,7 +88,7 @@ export class AcademicsService {
   getSubject(editId: string): Observable<any> {
     const jwtToken = localStorage.getItem('jwt');
     if (this.authService.extractRole() === '[ADMIN]') {
-      return this.http.get(BASE_URL + 'academics/subjects/get/' + editId);
+      return this.http.get(this.BASE_URI + 'academics/subjects/get/' + editId);
     } else {
       return of([]);
     }
@@ -95,7 +98,7 @@ export class AcademicsService {
     const jwtToken = localStorage.getItem('jwt');
     if (this.authService.extractRole() === '[ADMIN]') {
       console.log(item.id);
-      return this.http.put<any[]>(BASE_URL + 'academics/subjects/delete/' + item.id, item);
+      return this.http.put<any[]>(this.BASE_URI + 'academics/subjects/delete/' + item.id, item);
     } else {
       return of([]);
     }
@@ -105,7 +108,7 @@ export class AcademicsService {
     const jwtToken = localStorage.getItem('jwt');
     if (this.authService.extractRole() === '[ADMIN]') {
       console.log(item.id);
-      return this.http.put<any[]>(BASE_URL + 'academics/subjects/toggle/' + item.id, item);
+      return this.http.put<any[]>(this.BASE_URI + 'academics/subjects/toggle/' + item.id, item);
     } else {
       return of([]);
     }
@@ -115,7 +118,7 @@ export class AcademicsService {
     const jwtToken = localStorage.getItem('jwt');
     if (this.authService.extractRole() === '[ADMIN]') {
       // console.log(item.id);
-      return this.http.post<any[]>(BASE_URL + 'academics/subjects/addNew', value);
+      return this.http.post<any[]>(this.BASE_URI + 'academics/subjects/addNew', value);
     } else {
       return of([]);
     }
@@ -126,7 +129,7 @@ export class AcademicsService {
     const jwtToken = localStorage.getItem('jwt');
     if (this.authService.extractRole() === '[ADMIN]') {
       console.log(item.id);
-      return this.http.put<any[]>(BASE_URL + 'academics/subjects/editSubject/' + item.id, item);
+      return this.http.put<any[]>(this.BASE_URI + 'academics/subjects/editSubject/' + item.id, item);
     } else {
       return of([]);
     }
@@ -136,7 +139,7 @@ export class AcademicsService {
   getAllResults(): Observable<any> {
     const jwtToken = localStorage.getItem('jwt');
     if (this.authService.extractRole() === '[ADMIN]' || this.authService.extractRole() === '[TEACHER]') {
-      return this.http.get<any>(BASE_URL + 'academics/results/getAll');
+      return this.http.get<any>(this.BASE_URI + 'academics/results/getAll');
     } else {
       return of([]);
     }
@@ -145,7 +148,7 @@ export class AcademicsService {
   getResults(editId: string): Observable<any> {
     const jwtToken = localStorage.getItem('jwt');
     if (this.authService.extractRole() === '[ADMIN]') {
-      return this.http.get(BASE_URL + 'academics/results/get/' + editId);
+      return this.http.get(this.BASE_URI + 'academics/results/get/' + editId);
     } else {
       return of([]);
     }
@@ -155,7 +158,7 @@ export class AcademicsService {
     const jwtToken = localStorage.getItem('jwt');
     if (this.authService.extractRole() === '[ADMIN]') {
       console.log(item.id);
-      return this.http.put<any[]>(BASE_URL + 'academics/results/delete/' + item.id, item);
+      return this.http.put<any[]>(this.BASE_URI + 'academics/results/delete/' + item.id, item);
     } else {
       return of([]);
     }
@@ -165,7 +168,7 @@ export class AcademicsService {
     const jwtToken = localStorage.getItem('jwt');
     if (this.authService.extractRole() === '[ADMIN]') {
       console.log(item.id);
-      return this.http.put<any[]>(BASE_URL + 'academics/results/toggle/' + item.id, item);
+      return this.http.put<any[]>(this.BASE_URI + 'academics/results/toggle/' + item.id, item);
     } else {
       return of([]);
     }
@@ -175,7 +178,7 @@ export class AcademicsService {
     const jwtToken = localStorage.getItem('jwt');
     if (this.authService.extractRole() === '[ADMIN]') {
       // console.log(item.id);
-      return this.http.post<any[]>(BASE_URL + 'academics/results/addNew', value);
+      return this.http.post<any[]>(this.BASE_URI + 'academics/results/addNew', value);
     } else {
       return of([]);
     }
@@ -186,7 +189,7 @@ export class AcademicsService {
     const jwtToken = localStorage.getItem('jwt');
     if (this.authService.extractRole() === '[ADMIN]') {
       console.log(item.id);
-      return this.http.put<any[]>(BASE_URL + 'academics/results/edit/' + item.id, item);
+      return this.http.put<any[]>(this.BASE_URI + 'academics/results/edit/' + item.id, item);
     } else {
       return of([]);
     }
@@ -196,7 +199,7 @@ export class AcademicsService {
   getAllExams(): Observable<any> {
     const jwtToken = localStorage.getItem('jwt');
     if (this.authService.extractRole() === '[ADMIN]' || this.authService.extractRole() === '[TEACHER]') {
-      return this.http.get<any>(BASE_URL + 'academics/exam/getAll');
+      return this.http.get<any>(this.BASE_URI + 'academics/exam/getAll');
     } else {
       return of([]);
     }
@@ -205,7 +208,7 @@ export class AcademicsService {
   getExams(editId: string): Observable<any> {
     const jwtToken = localStorage.getItem('jwt');
     if (this.authService.extractRole() === '[ADMIN]') {
-      return this.http.get(BASE_URL + 'academics/exam/get/' + editId);
+      return this.http.get(this.BASE_URI + 'academics/exam/get/' + editId);
     } else {
       return of([]);
     }
@@ -215,7 +218,7 @@ export class AcademicsService {
     const jwtToken = localStorage.getItem('jwt');
     if (this.authService.extractRole() === '[ADMIN]') {
       console.log(item.id);
-      return this.http.put<any[]>(BASE_URL + 'academics/exam/delete/' + item.id, item);
+      return this.http.put<any[]>(this.BASE_URI + 'academics/exam/delete/' + item.id, item);
     } else {
       return of([]);
     }
@@ -225,7 +228,7 @@ export class AcademicsService {
     const jwtToken = localStorage.getItem('jwt');
     if (this.authService.extractRole() === '[ADMIN]') {
       console.log(item.id);
-      return this.http.put<any[]>(BASE_URL + 'academics/exam/toggle/' + item.id, item);
+      return this.http.put<any[]>(this.BASE_URI + 'academics/exam/toggle/' + item.id, item);
     } else {
       return of([]);
     }
@@ -235,7 +238,7 @@ export class AcademicsService {
     const jwtToken = localStorage.getItem('jwt');
     if (this.authService.extractRole() === '[ADMIN]') {
       // console.log(item.id);
-      return this.http.post<any[]>(BASE_URL + 'academics/exam/addNew', value);
+      return this.http.post<any[]>(this.BASE_URI + 'academics/exam/addNew', value);
     } else {
       return of([]);
     }
@@ -245,7 +248,7 @@ export class AcademicsService {
     const jwtToken = localStorage.getItem('jwt');
     if (this.authService.extractRole() === '[ADMIN]') {
       console.log(item.id);
-      return this.http.put<any[]>(BASE_URL + 'academics/exam/edit/' + item.id, item);
+      return this.http.put<any[]>(this.BASE_URI + 'academics/exam/edit/' + item.id, item);
     } else {
       return of([]);
     }
@@ -255,7 +258,7 @@ export class AcademicsService {
   getAllSlots(): Observable<any> {
     const jwtToken = localStorage.getItem('jwt');
     if (this.authService.extractRole() === '[ADMIN]' || this.authService.extractRole() === '[TEACHER]') {
-      return this.http.get<any>(BASE_URL + 'academics/slot/getAll');
+      return this.http.get<any>(this.BASE_URI + 'academics/slot/getAll');
     } else {
       return of([]);
     }
@@ -264,7 +267,7 @@ export class AcademicsService {
   getSlots(editId: string): Observable<any> {
     const jwtToken = localStorage.getItem('jwt');
     if (this.authService.extractRole() === '[ADMIN]') {
-      return this.http.get(BASE_URL + 'academics/slot/get/' + editId);
+      return this.http.get(this.BASE_URI + 'academics/slot/get/' + editId);
     } else {
       return of([]);
     }
@@ -274,7 +277,7 @@ export class AcademicsService {
     const jwtToken = localStorage.getItem('jwt');
     if (this.authService.extractRole() === '[ADMIN]') {
       console.log(item.id);
-      return this.http.put<any[]>(BASE_URL + 'academics/slot/delete/' + item.id, item);
+      return this.http.put<any[]>(this.BASE_URI + 'academics/slot/delete/' + item.id, item);
     } else {
       return of([]);
     }
@@ -284,7 +287,7 @@ export class AcademicsService {
     const jwtToken = localStorage.getItem('jwt');
     if (this.authService.extractRole() === '[ADMIN]') {
       console.log(item.id);
-      return this.http.put<any[]>(BASE_URL + 'academics/slot/toggle/' + item.id, item);
+      return this.http.put<any[]>(this.BASE_URI + 'academics/slot/toggle/' + item.id, item);
     } else {
       return of([]);
     }
@@ -293,7 +296,7 @@ export class AcademicsService {
   createSlots(value: any) {
     const jwtToken = localStorage.getItem('jwt');
     if (this.authService.extractRole() === '[ADMIN]') {
-      return this.http.post<any[]>(BASE_URL + 'academics/slot/addNew', value);
+      return this.http.post<any[]>(this.BASE_URI + 'academics/slot/addNew', value);
     } else {
       return of([]);
     }
@@ -303,7 +306,7 @@ export class AcademicsService {
     const jwtToken = localStorage.getItem('jwt');
     if (this.authService.extractRole() === '[ADMIN]') {
       console.log(item.id);
-      return this.http.put<any[]>(BASE_URL + 'academics/slot/edit/' + item.id, item);
+      return this.http.put<any[]>(this.BASE_URI + 'academics/slot/edit/' + item.id, item);
     } else {
       return of([]);
     }
@@ -313,7 +316,7 @@ export class AcademicsService {
   getAllTimetable(): Observable<any> {
     const jwtToken = localStorage.getItem('jwt');
     if (this.authService.extractRole() === '[ADMIN]' || this.authService.extractRole() === '[TEACHER]') {
-      return this.http.get<any>(BASE_URL + 'academics/timetable/getAll');
+      return this.http.get<any>(this.BASE_URI + 'academics/timetable/getAll');
     } else {
       return of([]);
     }
@@ -322,7 +325,7 @@ export class AcademicsService {
   getTimetable(editId: string): Observable<any> {
     const jwtToken = localStorage.getItem('jwt');
     if (this.authService.extractRole() === '[ADMIN]') {
-      return this.http.get(BASE_URL + 'academics/timetable/get/' + editId);
+      return this.http.get(this.BASE_URI + 'academics/timetable/get/' + editId);
     } else {
       return of([]);
     }
@@ -332,7 +335,7 @@ export class AcademicsService {
     const jwtToken = localStorage.getItem('jwt');
     if (this.authService.extractRole() === '[ADMIN]') {
       console.log(item.id);
-      return this.http.put<any[]>(BASE_URL + 'academics/timetable/delete/' + item.id, item);
+      return this.http.put<any[]>(this.BASE_URI + 'academics/timetable/delete/' + item.id, item);
     } else {
       return of([]);
     }
@@ -342,7 +345,7 @@ export class AcademicsService {
     const jwtToken = localStorage.getItem('jwt');
     if (this.authService.extractRole() === '[ADMIN]') {
       console.log(item.id);
-      return this.http.put<any[]>(BASE_URL + 'academics/timetable/toggle/' + item.id, item);
+      return this.http.put<any[]>(this.BASE_URI + 'academics/timetable/toggle/' + item.id, item);
     } else {
       return of([]);
     }
@@ -351,7 +354,7 @@ export class AcademicsService {
   createTimetable(value: any) {
     const jwtToken = localStorage.getItem('jwt');
     if (this.authService.extractRole() === '[ADMIN]') {
-      return this.http.post<any[]>(BASE_URL + 'academics/timetable/addNew', value);
+      return this.http.post<any[]>(this.BASE_URI + 'academics/timetable/addNew', value);
     } else {
       return of([]);
     }
@@ -361,7 +364,7 @@ export class AcademicsService {
     const jwtToken = localStorage.getItem('jwt');
     if (this.authService.extractRole() === '[ADMIN]') {
       console.log(item.id);
-      return this.http.put<any[]>(BASE_URL + 'academics/timetable/edit/' + item.id, item);
+      return this.http.put<any[]>(this.BASE_URI + 'academics/timetable/edit/' + item.id, item);
     } else {
       return of([]);
     }

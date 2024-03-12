@@ -5,7 +5,7 @@ import { switchMap, takeUntil } from 'rxjs/operators';
 import jwt_decode from 'jwt-decode';
 import { ILogin, ILoginResponse } from '../../interfaces/login.interface';
 import { IStudentRegister } from '../../interfaces/signup.interface';
-import { BASE_URL } from '../../constants/baseurls.constant';
+import { API_AUTH_SERVICE } from '../../constants/baseurls.constant';
 
 @Injectable({
   providedIn: 'root'
@@ -15,22 +15,24 @@ export class JwtService {
   constructor(private http: HttpClient) { 
   }
 
+  BASE_URI= API_AUTH_SERVICE;
+
   login(loginRequest: ILogin): Observable<ILoginResponse> {
     console.log("Logging in");
     this.initLogoutTimer();
-    return this.http.post<ILoginResponse>(BASE_URL + 'auth/login', loginRequest);
+    return this.http.post<ILoginResponse>(this.BASE_URI + 'auth/login', loginRequest);
   }
 
   logout(): void {
     localStorage.removeItem('jwt');
-    this.http.post(BASE_URL + 'logout', {});
+    this.http.post(this.BASE_URI + 'logout', {});
   }
 
   private initLogoutTimer(): void {
     const logoutTime = 12 * 60 * 60 * 1000; // 12 hours
     timer(0, 1000) // Check every second
       .pipe(
-        takeUntil(this.http.post(BASE_URL + 'logout', {})), // Stop timer when logout is triggered
+        takeUntil(this.http.post(this.BASE_URI + 'logout', {})), // Stop timer when logout is triggered
         switchMap(() => timer(logoutTime))
       )
       .subscribe(() => {

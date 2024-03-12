@@ -4,7 +4,7 @@ import { Observable, Subject } from 'rxjs';
 // import * as SockJS from 'sockjs-client';
 import { Stomp } from '@stomp/stompjs';
 import { CustomMessage } from '../../interfaces/user.model';
-import { BASE_URL, USER_SERVICE } from '../../constants/baseurls.constant';
+import { API_NOTIFICATION_SERVICE, API_USER_SERVICE } from '../../constants/baseurls.constant';
 import { HttpClient } from '@angular/common/http';
 import { JwtService } from '../auth/jwt.service';
 import { webSocket } from 'rxjs/webSocket';
@@ -20,12 +20,15 @@ export class NotificationService {
     private authService: JwtService,
     private snackBar: MatSnackBar) { }
 
+  BASE_URI = API_NOTIFICATION_SERVICE;
+  USER_URI = API_USER_SERVICE;
+
   getAllNotifications(): Observable<any> {
-    return this.http.get(BASE_URL + 'notification/getAll');
+    return this.http.get(this.BASE_URI + 'notification/getAll');
   }
 
   publishNotifications(payload: any): Observable<any> {
-    return this.http.post(BASE_URL + 'notification/publish', payload);
+    return this.http.post(this.BASE_URI + 'notification/publish', payload);
   }
 
   // greetings: string[] = [];
@@ -45,7 +48,7 @@ export class NotificationService {
   }
 
   connect() {
-    const socket = new SockJS(USER_SERVICE + 'user/testchat');
+    const socket = new SockJS(this.USER_URI + 'user/testchat');
     this.stompClient = Stomp.over(socket);
     const _this = this;
     this.stompClient.connect(
