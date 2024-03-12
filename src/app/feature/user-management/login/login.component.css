@@ -63,13 +63,15 @@ button {
     box-sizing: border-box;
     color: #000000;
   }
+  
+  /* 
   .right-container {
-    /* flex: 1; */
+	flex: 1;
     background: url('src/assets/28480371_7402282.jpg') center center / cover no-repeat;
   }
   
 
-/* .btn-primary {
+.btn-primary {
     background-color: #007bff;
     border-color: #007bff;
 }
