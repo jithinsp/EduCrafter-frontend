@@ -1,7 +1,7 @@
 export const BASE_URL = ["http://localhost:8060/"]
 export const USER_SERVICE = ["http://localhost:8084/"]
 
-export const SSL_URL = ["api.techzonline.shop/"]
+export const SSL_URL = ["https://api.techzonline.shop/"]
 
 export const API_AUTH_SERVICE = SSL_URL
 export const API_USER_SERVICE = SSL_URL
