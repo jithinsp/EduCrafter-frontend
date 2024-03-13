@@ -19,6 +19,7 @@ export class JwtService {
 
   login(loginRequest: ILogin): Observable<ILoginResponse> {
     console.log("Logging in");
+    console.log(this.BASE_URI + 'auth/login');
     this.initLogoutTimer();
     return this.http.post<ILoginResponse>(this.BASE_URI + 'auth/login', loginRequest);
   }
