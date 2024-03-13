@@ -24,6 +24,11 @@ export class JwtService {
     return this.http.post<ILoginResponse>(this.BASE_URI + 'auth/login', loginRequest);
   }
 
+  test(): Observable<any> {
+    console.log(this.BASE_URI + 'auth/users');
+    return this.http.get<any>(this.BASE_URI + 'auth/users');
+  }
+  
   logout(): void {
     localStorage.removeItem('jwt');
     this.http.post(this.BASE_URI + 'logout', {});

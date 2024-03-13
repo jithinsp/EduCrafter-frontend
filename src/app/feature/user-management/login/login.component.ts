@@ -50,4 +50,11 @@ export class LoginComponent implements OnInit,OnDestroy {
       this.loginSubscription.unsubscribe();
     }
   }
+    test(){
+    this.service.test().subscribe(
+      (response) => {
+        console.log(response);
+      }
+      )
+  }
 }
