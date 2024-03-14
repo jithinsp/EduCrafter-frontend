@@ -48,7 +48,7 @@ export class NotificationService {
   }
 
   connect() {
-    const socket = new SockJS(this.USER_URI + 'user/testchat');
+    const socket = new SockJS(this.USER_URI + 'ws/testchat');
     this.stompClient = Stomp.over(socket);
     const _this = this;
     this.stompClient.connect(
@@ -72,7 +72,7 @@ export class NotificationService {
 
   sendMessage(newmessage:string) {
     this.stompClient.send(
-      '/user/app/application',
+      '/ws/app/application',
       {},
       // JSON.stringify(this.newmessage)
       newmessage
@@ -83,7 +83,7 @@ export class NotificationService {
 
   sendPrivateMessage(newmessage) {
     this.stompClient.send(
-      '/user/app/sendToAll',
+      '/ws/app/sendToAll',
       {},
       // JSON.stringify(this.newmessage)
       newmessage
