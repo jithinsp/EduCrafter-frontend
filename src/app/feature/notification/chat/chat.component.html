@@ -13,13 +13,16 @@
 <div class="flex flex-col h-screen p-4">
     <div class="card h-screen p-4">
         <div class="flex-grow">
-            <!-- <div *ngFor="let message of greetings" class="container mb-2">
-                <div class="bg-blue-500 text-white p-2 rounded">
+            <div *ngFor="let message of greetings; let i = index" class="container mb-2 flex">
+                <div *ngIf="myGreetings[i]" class="bg-blue-500 text-white p-2 w-1/2 justify-start rounded">
                     <p>{{ message }}</p>
                 </div>
-            </div> -->
+                <div *ngIf="!myGreetings[i]" class="bg-red-500 text-white p-2 w-1/2 justify-end rounded">
+                    <p>{{ message }}</p>
+                </div>
+            </div>
 
-                <div *ngFor="let message of greetings" class="container mb-2">
+                <!-- <div *ngFor="let message of greetings" class="container mb-2">
                     <div class="bg-blue-500 text-white p-2 rounded" *ngIf="message">
                         <p class="justify-start">{{ message }}</p>
                     </div>
@@ -29,7 +32,7 @@
                     <div class="bg-red-500 text-white p-2 rounded" *ngIf="message">
                         <p class="justify-end">{{ message }}</p>
                     </div>
-                </div>
+                </div> -->
 
     </div>
         <form #loginForm="ngForm" class="flex items-end p-4 mb-4">
