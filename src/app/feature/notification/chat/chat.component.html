@@ -19,21 +19,18 @@
                 </div>
             </div> -->
 
-
-            <div class="w-1/2">
                 <div *ngFor="let message of greetings" class="container mb-2">
-                    <div class="bg-blue-500 text-white p-2 rounded" *ngIf="message">
+                    <div class="bg-blue-500 text-white p-2 rounded justify-start" *ngIf="message">
                         <p>{{ message }}</p>
                     </div>
                 </div>
-            </div>
-            <div class="w-1/2 flex justify-end">
-                <div *ngFor="let message of myGreetings" class="container mb-2">
+
+                <div *ngFor="let message of myGreetings" class="container mb-2 justify-end">
                     <div class="bg-red-500 text-white p-2 rounded" *ngIf="message">
                         <p>{{ message }}</p>
                     </div>
                 </div>
-            </div>
+
     </div>
         <form #loginForm="ngForm" class="flex items-end p-4 mb-4">
             <div class="flex-1">
