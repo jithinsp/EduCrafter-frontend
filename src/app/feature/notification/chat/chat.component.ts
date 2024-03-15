@@ -17,6 +17,7 @@ import { JwtService } from 'src/app/core/services/auth/jwt.service';
 export class ChatComponent {
   title = 'WebSocketChatRoom';
   greetings: string[] = [];
+  myGreetings: string[] = [];
   disabled = true;
   newmessage: string;
   username: string ='';
@@ -37,7 +38,11 @@ export class ChatComponent {
 
   showMessage() {
     this.notificationService.greetings$.subscribe((message: string) => {
-      this.greetings.push(message);
+      if(this.username === message.split(':')[0]){
+        this.myGreetings.push(message);
+      } else{
+        this.greetings.push(message);
+      }
       console.log(message);
     });
   }
