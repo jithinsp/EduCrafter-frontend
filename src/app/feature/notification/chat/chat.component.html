@@ -20,14 +20,14 @@
             </div> -->
 
                 <div *ngFor="let message of greetings" class="container mb-2">
-                    <div class="bg-blue-500 text-white p-2 rounded justify-start" *ngIf="message">
-                        <p>{{ message }}</p>
+                    <div class="bg-blue-500 text-white p-2 rounded" *ngIf="message">
+                        <p class="justify-start">{{ message }}</p>
                     </div>
                 </div>
 
-                <div *ngFor="let message of myGreetings" class="container mb-2 justify-end">
+                <div *ngFor="let message of myGreetings" class="container mb-2 ">
                     <div class="bg-red-500 text-white p-2 rounded" *ngIf="message">
-                        <p>{{ message }}</p>
+                        <p class="justify-end">{{ message }}</p>
                     </div>
                 </div>
 
