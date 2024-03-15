@@ -39,7 +39,7 @@ export class FeepaymentComponent {
     this.userSubscription = this.paymentService.getUser().subscribe(
       (data: any) => {
         console.log(data);
-        if(data){
+        if (Array.isArray(data) && data.length > 0) {
           this.isPaid=true;
         } else {
           this.isPaid=false;          
