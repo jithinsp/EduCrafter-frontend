@@ -82,21 +82,18 @@ export class NotificationService {
   }
 
   sendPrivateMessage(newmessage) {
-    const currentUser = this.authService.extractUsername();
-    if (!currentUser) {
-      console.log('Cannot extract current username');
+    let messageToSend = newmessage;
+    if(this.authService.extractUsername()){
+      const username = this.authService.extractUsername().split('@')[0];
+      messageToSend = `${username}: ${newmessage}`;
     }
-  
-    const username = currentUser.split('@')[0];
-    const messageToSend = `${username}: ${newmessage}`;
-
     this.stompClient.send(
       '/ws/app/sendToAll',
       {},
       // JSON.stringify(messageToSend)
-      newmessage
+      messageToSend
     );
-    console.log(newmessage);
+    console.log(messageToSend);
     // this.greetingsSubject.next(newmessage);
     newmessage = "";
   }
