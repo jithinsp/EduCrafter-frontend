@@ -30,10 +30,13 @@ import { NewTimetableComponent } from './feature/timetable/new-timetable/new-tim
 import { ResultsViewComponent } from './feature/results/results-view/results-view.component';
 import { ExamViewComponent } from './feature/exam/exam-view/exam-view.component';
 import { SlotViewComponent } from './feature/slot/slot-view/slot-view.component';
+import { AdminDashboardComponent } from './feature/dashboard/admin-dashboard/admin-dashboard.component';
 
 const routes: Routes = [
   { path: "", redirectTo: "dashboard", pathMatch: 'full'},
   { path: "dashboard", component: DashboardComponent , canActivate: [AuthGuard]},
+  // { path: "dashboard", component: DashboardComponent},
+  { path: "admin-dashboard", component: AdminDashboardComponent , canActivate: [AuthGuard]},
   { path: "register", component: RegisterComponent},
   { path: "login", component: LoginComponent},
   { path: "logout", component: LogoutComponent},

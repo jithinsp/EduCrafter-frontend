@@ -13,20 +13,39 @@ declare const Razorpay:any;
 })
 export class FeepaymentComponent {
   role:string;
+  isPaid:boolean=false;
 
   constructor(private paymentService: PaymentService,
     private jwtService: JwtService) {}
 
   private paymentSubscription: Subscription;
+  private userSubscription: Subscription;
   ngOnDestroy() {
     // Unsubscribe from subscriptions to avoid memory leaks
     if (this.paymentSubscription) {
       this.paymentSubscription.unsubscribe();
     }
+    if (this.userSubscription) {
+      this.userSubscription.unsubscribe();
+    }
   }
 
   ngOnInit(){
     this.role = this.jwtService.extractRole();
+    this.isPaidUser();
+  }
+
+  isPaidUser(){
+    this.userSubscription = this.paymentService.getUser().subscribe(
+      (data: any) => {
+        console.log(data);
+        if(data){
+          this.isPaid=true;
+        } else {
+          this.isPaid=false;          
+        }
+      }
+    )
   }
 
   payFee() {

@@ -68,6 +68,7 @@ import { NewExamComponent } from './feature/exam/new-exam/new-exam.component';
 import { NewSlotComponent } from './feature/slot/new-slot/new-slot.component';
 import { SlotViewComponent } from './feature/slot/slot-view/slot-view.component';
 import { NewTimetableComponent } from './feature/timetable/new-timetable/new-timetable.component';
+import { AdminDashboardComponent } from './feature/dashboard/admin-dashboard/admin-dashboard.component';
 // import { NgxStompjsModule } from '@stomp/ng2-stompjs';
 // import { MatFileInputModule } from 'mat-file-input';
 // import { ContextMenuComponent } from './path-to-context-menu.component';
@@ -108,6 +109,7 @@ import { NewTimetableComponent } from './feature/timetable/new-timetable/new-tim
     NewSlotComponent,
     SlotViewComponent,
     NewTimetableComponent,
+    AdminDashboardComponent,
     // ContextMenuComponent
   ],
   imports: [
