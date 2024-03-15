@@ -94,9 +94,9 @@ export class NotificationService {
       '/ws/app/sendToAll',
       {},
       // JSON.stringify(messageToSend)
-      messageToSend
+      newmessage
     );
-    console.log(messageToSend);
+    console.log(newmessage);
     // this.greetingsSubject.next(newmessage);
     newmessage = "";
   }
