@@ -19,6 +19,7 @@ export class ChatComponent {
   greetings: string[] = [];
   disabled = true;
   newmessage: string;
+  username: string ='';
  
   private stompClient = null;
 
@@ -27,10 +28,11 @@ export class ChatComponent {
 
   ngOnInit() {
     this.showMessage();
+    this.username = this.authService.extractUsername().split('@')[0];
   }
   
   sendMessage() {
-    this.notificationService.sendPrivateMessage(this.newmessage);
+    this.notificationService.sendPrivateMessage(this.username + ': '+ this.newmessage);
   }
 
   showMessage() {
