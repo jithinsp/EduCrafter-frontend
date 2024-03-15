@@ -14,7 +14,7 @@
     <div class="card h-screen p-4">
         <div class="flex-grow">
             <div *ngFor="let message of greetings; let i = index" class="container mb-2 flex">
-                <div *ngIf="myGreetings[i]" class="bg-slate-200 text-black p-2 w-11/12 flex flex-row justify-end rounded">
+                <div *ngIf="myGreetings[i]" class="bg-slate-100 text-black p-2 w-11/12 flex flex-row justify-end rounded">
                     <p><b>{{ message }}</b></p>
                 </div>
                 <div *ngIf="!myGreetings[i]" class="bg-blue-500 text-white p-2 flex flex-row justify-start rounded">

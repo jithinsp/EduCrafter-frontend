@@ -40,7 +40,7 @@ export class ChatComponent {
     this.notificationService.greetings$.subscribe((message: string) => {
       if(this.username === message.split(':')[0]){
         this.myGreetings.push(true);
-        this.greetings.push(message);
+        this.greetings.push(message.split(':')[1]);
       } else{
         this.greetings.push(message);
         this.myGreetings.push(false);
