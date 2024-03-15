@@ -85,7 +85,8 @@ export class NotificationService {
     let messageToSend = newmessage;
     if(this.authService.extractUsername()){
       const username = this.authService.extractUsername().split('@')[0];
-      messageToSend = `${username}: ${newmessage}`;
+      messageToSend = username;
+      // messageToSend = `${username}: ${newmessage}`;
     }
     this.stompClient.send(
       '/ws/app/sendToAll',
