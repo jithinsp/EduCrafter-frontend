@@ -33,7 +33,12 @@ export class ChatComponent {
   }
   
   sendMessage() {
-    this.notificationService.sendPrivateMessage(this.username + ': '+ this.newmessage);
+    const trimmedMessage = this.newmessage.trim();
+
+    if (trimmedMessage !== '') {
+        this.notificationService.sendPrivateMessage(this.username + ': ' + trimmedMessage);
+    }
+    this.newmessage='';
   }
 
   showMessage() {
