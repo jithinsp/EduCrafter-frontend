@@ -104,29 +104,17 @@ export class ResourcesComponent implements OnInit {
 
   delete(item: any) {
     this.fetchFiles();
-    // debugger;
-    // this.paymentService.deleteClasses(item).subscribe((res) => {
-    //   console.log(res);
-
-    // },
-    //   error => {
-    //     console.error('Error fetching user data:', error);
-    //   }
-    // );
+    this.resourcesService.deleteResource(item).subscribe((res) => {
+      console.log(res);
+    });
   }
 
 
   toggle(item: any) {
     this.fetchFiles();
-    // debugger;
-    // this.paymentService.deleteClasses(item).subscribe((res) => {
-    //   console.log(res);
-
-    // },
-    //   error => {
-    //     console.error('Error fetching user data:', error);
-    //   }
-    // );
+    this.resourcesService.deleteResource(item).subscribe((res) => {
+      console.log(res);
+    });
   }
 
   create() {

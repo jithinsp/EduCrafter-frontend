@@ -42,4 +42,14 @@ export class ResourcesService {
     
   //   return this.http.post(BASE_URL + 'academics/resources/upload', formData);
   // }
+
+  deleteResource(item: any) {
+      console.log(item.id);
+      return this.http.put<any[]>(this.BASE_URI + 'academics/resources/delete/' + item.id, item);
+  }
+
+  toggleResource(item: any) {
+      console.log(item.id);
+      return this.http.put<any[]>(this.BASE_URI + 'academics/resources/toggle/' + item.id, item);
+  }
 }
