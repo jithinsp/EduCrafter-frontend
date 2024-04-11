@@ -30,15 +30,16 @@ export class NotificationService {
   publishNotifications(payload: any): Observable<any> {
     return this.http.post(this.BASE_URI + 'notification/publish', payload);
   }
-
+  // ngOnInit() {
+  //   this.connect();
+  // }
+  
   // greetings: string[] = [];
   disabled = true;
 
   private stompClient = null;
 
-  // ngOnInit() {
-  //   this.connect();
-  // }
+
 
   setConnected(connected: boolean) {
     this.disabled = !connected;
